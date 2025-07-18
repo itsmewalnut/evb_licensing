@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@import "../../vendor/livewire/flux/dist/flux.css";
+@import "flowbite/src/themes/default";
+
+@plugin "flowbite/plugin";
+@source "../../node_modules/flowbite";
+@source "../node_modules/flowbite-datepicker";
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+
+    --animate-notif: notif 2.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+
+    @keyframes notif {
+        0% {
+            opacity: 0;
+            transform: translateY(30px) translateX(-50%);
+        }
+
+        19% {
+            opacity: 1;
+            transform: translateY(0) translateX(-50%);
+        }
+
+        81% {
+            opacity: 1;
+            transform: translateY(0) translateX(-50%);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translateY(30px) translateX(-50%);
+        }
+    }
+}
+
+.bg-gray-900\/50 {
+    background-color: rgba(21, 22, 23, 0.8) !important;
+}
+
+.dark\:bg-gray-900\/80 {
+    background-color: rgba(28, 29, 30, 0.5) !important;
+}

@@ -13,6 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @fluxAppearance
 </head>
 
 <body
@@ -49,7 +50,8 @@
                     <input required type="password" name="password" id="password"
                         class="p-2 pl-10 block w-full rounded-md border-1 border-slate-50 shadow-lg bg-transparent"
                         placeholder="Password">
-                    <button type="button" id="togglePassword" class="absolute right-3 hidden" tabindex="-1">
+                    <button type="button" id="togglePassword" class="absolute right-3 hidden cursor-pointer"
+                        tabindex="-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -64,28 +66,35 @@
             <button type="submit"
                 class="w-full border-1 p-3 rounded-md text-white transition duration-400 hover:scale-105 cursor-pointer">Login</button>
         </form>
-        @if (session('error'))
-            <div class="fixed z-50 flex items-center max-w-xs w-full bg-rose-600 text-white px-6 py-4 rounded-lg shadow-lg font-semibold animate-notif left-1/2 bottom-8 transform"
-                role="alert" id="error-alert">
-                <svg class="w-6 h-6 mr-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span class="flex-1 text-left">{{ session('error') }}</span>
-            </div>
-        @elseif (session('success'))
-            <div class="fixed z-50 flex items-center max-w-xs w-full bg-emerald-700 text-white px-6 py-4 rounded-lg shadow-lg font-semibold animate-notif left-1/2 bottom-8 transform"
-                role="alert" id="success-alert">
-                <svg class="w-6 h-6 mr-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span class="flex-1 text-left">{{ session('success') }}</span>
-            </div>
-        @endif
     </div>
+    @session('error')
+    <div class="fixed z-50 flex items-center max-w-xs w-full bg-red-100 dark:bg-red-800 text-red-500 dark:text-red-200 px-6 py-4 rounded-lg shadow-lg font-semibold left-1/2 bottom-8 transform -translate-x-1/2 transition-opacity duration-500"
+        x-data="{ show: true }" x-show="show" x-init="setTimeout(() => { show = false }, 3000)"
+        x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-500"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" role="alert">
+        <svg class="w-6 h-6 mr-3 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
+        </svg>
+        <span class="flex-1 text-left text-sm font-normal">{{ $value }}</span>
+    </div>
+    @endsession
+    @session('success')
+    <div class="fixed z-50 flex items-center max-w-xs w-full bg-green-100 dark:bg-green-800 text-green-500 dark:text-green-200 px-6 py-4 rounded-lg shadow-lg font-semibold left-1/2 bottom-8 transform -translate-x-1/2 transition-opacity duration-500"
+        x-data="{ show: true }" x-show="show" x-init="setTimeout(() => { show = false }, 3000)"
+        x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-500"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" role="alert">
+        <svg class="w-6 h-6 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+        </svg>
+        <span class="flex-1 text-left text-sm font-normal">{{ $value }}</span>
+    </div>
+    @endsession('success')
+    @fluxScripts
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const passwordInput = document.getElementById('password');

@@ -1,7 +1,7 @@
 <flux:sidebar sticky stashable class="shadow-xl bg-zinc-50 dark:bg-zinc-900">
     <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-    <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
+    <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse py-2" wire:navigate>
         <x-app-logo />
     </a>
 
@@ -25,7 +25,8 @@
 
     <!-- Desktop User Menu -->
     <flux:dropdown position="bottom" align="start">
-        <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()" />
+        <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()"
+            icon-trailing="chevron-up-down" />
         <flux:menu class="w-[220px]">
             <flux:menu.radio.group>
                 <div class="p-0 text-sm font-normal">
@@ -48,7 +49,8 @@
             <flux:menu.separator />
 
             <flux:menu.radio.group>
-                <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('Settings') }}
+                <flux:menu.item :href="route('profile')" :current="request()->routeIs('profile')" icon="cog"
+                    wire:navigate>{{ __('Settings') }}
                 </flux:menu.item>
             </flux:menu.radio.group>
 
@@ -56,7 +58,8 @@
 
             <form method="POST" action="{{ route('logout') }}" class="w-full">
                 @csrf
-                <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
+                <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle"
+                    class="w-full cursor-pointer">
                     {{ __('Log Out') }}
                 </flux:menu.item>
             </form>
@@ -69,6 +72,7 @@
     <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 </flux:header>
 
+{{ $slot }}
 
 {{-- <aside id="logo-sidebar"
     class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-2xl"

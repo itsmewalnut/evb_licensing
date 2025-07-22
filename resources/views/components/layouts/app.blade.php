@@ -1,15 +1,21 @@
 @include('partials.header')
 <div class="min-h-screen">
-    <x-sidebar />
-    {{ $slot }}
+    <x-sidebar :title="$title ?? null" />
+    <flux:main>
+        {{ $slot }}
+    </flux:main>
 </div>
-@if (session('success'))
-    <div class="fixed z-50 flex items-center max-w-xs w-full bg-emerald-700 text-white px-6 py-4 rounded-lg shadow-lg font-semibold animate-notif left-1/2 bottom-8 transform"
-        role="alert" id="success-alert">
-        <svg class="w-6 h-6 mr-3 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span class="flex-1 text-left">{{ session('success') }}</span>
-    </div>
-@endif
+@session('success')
+<div class="fixed z-50 flex items-center max-w-xs w-full bg-green-100 dark:bg-green-800 text-green-500 dark:text-green-200 px-6 py-4 rounded-lg shadow-lg font-semibold left-1/2 bottom-8 transform -translate-x-1/2 transition-opacity duration-500"
+    x-data="{ show: true }" x-show="show" x-init="setTimeout(() => { show = false }, 3000)" x-transition:enter="transition-opacity duration-500"
+    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+    x-transition:leave="transition-opacity duration-500" x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0" role="alert">
+    <svg class="w-6 h-6 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+        <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+    </svg>
+    <span class="flex-1 text-left text-sm font-normal">{{ $value }}</span>
+</div>
+@endsession('success')
 @include('partials.footer')

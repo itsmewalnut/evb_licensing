@@ -75,8 +75,12 @@
                                     required autocomplete="new-password" viewable />
                             </div>
                             <div class="mb-4">
-                                <flux:input wire:model="password" :label="__('New Password')" type="password" required
-                                    autocomplete="new-password" viewable />
+                                <flux:field>
+                                    <flux:input wire:model="password" :label="__('New Password')" type="password"
+                                        required autocomplete="new-password" viewable />
+                                    <flux:description>Must be at least 8 characters long, include an uppercase letter, a
+                                        number, and a special character.</flux:description>
+                                </flux:field>
                             </div>
                             <div class="mb-6">
                                 <flux:input wire:model="password" :label="__('Confirm New Password')" type="password"

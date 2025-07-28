@@ -21,14 +21,14 @@
             </div>
 
             {{-- user modals --}}
-            <livewire:create-user />
-            <livewire:edit-user />
+            <livewire:users.create-user />
+            <livewire:users.edit-user />
 
             {{-- delete user modal --}}
             <flux:modal name="delete-user" class="min-w-[22rem]">
                 <div class="space-y-6">
                     <div>
-                        <flux:heading size="lg">Delete user?</flux:heading>
+                        <flux:heading size="lg" wire:model="user_name">Delete {{ $user_name }}?</flux:heading>
                         <flux:text class="mt-2">
                             <p>You're about to delete this user.</p>
                             <p>This action cannot be reversed.</p>
@@ -40,6 +40,28 @@
                             <flux:button variant="ghost">Cancel</flux:button>
                         </flux:modal.close>
                         <flux:button type="submit" variant="danger" wire:click="deleteUser()">Delete User
+                        </flux:button>
+                    </div>
+                </div>
+            </flux:modal>
+
+            {{-- reset password modal --}}
+            <flux:modal name="reset-password" class="min-w-[22rem]">
+                <div class="space-y-6">
+                    <div>
+                        <flux:heading size="lg">Reset Password
+                        </flux:heading>
+                        <flux:text class="mt-2">
+                            <p wire:model="user_name">You're about to reset the password of {{ $user_name }}.</p>
+                            <p>This action cannot be reversed.</p>
+                        </flux:text>
+                    </div>
+                    <div class="flex gap-2">
+                        <flux:spacer />
+                        <flux:modal.close>
+                            <flux:button variant="ghost">Cancel</flux:button>
+                        </flux:modal.close>
+                        <flux:button type="submit" variant="danger" wire:click="ResetPass()">Reset
                         </flux:button>
                     </div>
                 </div>
@@ -140,6 +162,11 @@
                                     <flux:modal.trigger name="delete-user">
                                         <flux:button variant="danger" icon="trash"
                                             wire:click="delete({{ $user->id }})">Delete</flux:button>
+                                    </flux:modal.trigger>
+                                    <flux:modal.trigger name="reset-password">
+                                        <flux:button icon="arrow-path-rounded-square"
+                                            wire:click="resetPassword({{ $user->id }})">Reset
+                                        </flux:button>
                                     </flux:modal.trigger>
                                 </td>
                             </tr>

@@ -1,7 +1,7 @@
 <flux:modal name="edit-user" class="md:w-150 w-100">
     <div class="space-y-6">
         <div>
-            <flux:heading size="lg">Edit User</flux:heading>
+            <flux:heading size="lg" wire:model="user_name">Edit {{ $user_name }}</flux:heading>
             <flux:text class="mt-2">Make sure to input all the details.</flux:text>
         </div>
         <flux:select label="Branch" wire:model="branch" placeholder="Choose Branch...">

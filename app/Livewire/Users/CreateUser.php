@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Users;
 
 use App\Models\User;
 use Livewire\Component;
@@ -8,7 +8,7 @@ use Flux\Flux;
 
 class CreateUser extends Component
 {
-    public $branch = "", $department = "", $name, $email, $password = "evbgroup123", $role = "";
+    public $branch = "", $department = "", $name, $email, $password = "Evbgroup123!", $role = "";
 
     protected function rules()
     {
@@ -36,13 +36,13 @@ class CreateUser extends Component
 
         $this->reset();
         Flux::modal('create-user')->close();
-        session()->flash("success", "User successfully added.");
+        session()->flash("success", "User successfully Added.");
         $this->redirectRoute('users', navigate: true);
         // $this->dispatch("reloadUsers");
     }
 
     public function render()
     {
-        return view('livewire.create-user');
+        return view('livewire.users.create-user');
     }
 }

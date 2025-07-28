@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Users;
 
 use App\Models\User;
 use Flux\Flux;
@@ -9,7 +9,7 @@ use Livewire\Attributes\On;
 
 class EditUser extends Component
 {
-    public $userID, $branch, $department, $name, $email, $role;
+    public $userID, $user_name, $branch, $department, $name, $email, $role;
 
     protected function rules()
     {
@@ -24,7 +24,7 @@ class EditUser extends Component
 
     public function render()
     {
-        return view('livewire.edit-user');
+        return view('livewire.users.edit-user');
     }
 
     #[On("editUser")]
@@ -32,6 +32,7 @@ class EditUser extends Component
     {
         $users = User::find($id);
         $this->userID = $id;
+        $this->user_name = $users->name;
         $this->branch = $users->branch;
         $this->department = $users->department;
         $this->name = $users->name;

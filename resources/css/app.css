@@ -1,6 +1,6 @@
 @import "tailwindcss";
-@import "../../vendor/livewire/flux/dist/flux.css";
 @import "flowbite/src/themes/default";
+@import "../../vendor/livewire/flux/dist/flux.css";
 
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
@@ -15,30 +15,6 @@
     --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
-
-    --animate-notif: notif 2.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-
-    @keyframes notif {
-        0% {
-            opacity: 0;
-            transform: translateY(30px) translateX(-50%);
-        }
-
-        19% {
-            opacity: 1;
-            transform: translateY(0) translateX(-50%);
-        }
-
-        81% {
-            opacity: 1;
-            transform: translateY(0) translateX(-50%);
-        }
-
-        100% {
-            opacity: 0;
-            transform: translateY(30px) translateX(-50%);
-        }
-    }
 }
 
 .bg-gray-900\/50 {
